@@ -18,6 +18,7 @@ public class NotificationChannel implements INotificationChannel {
 
     protected NotificationChannel(Context context, Bundle bundle) {
         mContext = context;
+
         mNotificationChannelProps = createProps(bundle);
     }
 
@@ -31,6 +32,7 @@ public class NotificationChannel implements INotificationChannel {
 
     @Override
     public void setNotificationChannel() {
+
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
             return;
         }
@@ -74,6 +76,11 @@ public class NotificationChannel implements INotificationChannel {
                     createVibrationPatternFromList(mNotificationChannelProps.getVibrationPattern())
             );
         }
+
+        final NotificationManager notificationManager = (NotificationManager) mContext
+                .getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.deleteNotificationChannel(mNotificationChannelProps.getChannelId());
+
         notificationManager.createNotificationChannel(channel);
     }
 
