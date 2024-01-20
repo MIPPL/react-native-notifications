@@ -142,8 +142,7 @@ public class PushNotification implements IPushNotification {
     }
 
     protected PendingIntent getCTAPendingIntent() {
-        final Intent cta = new Intent(mContext, ProxyService.class);
-        return NotificationIntentAdapter.createPendingNotificationIntent(mContext, cta, mNotificationProps);
+        return NotificationIntentAdapter.createPendingNotificationIntent(mContext, mNotificationProps);
     }
 
     protected Notification buildNotification(PendingIntent intent,String channelID) {
